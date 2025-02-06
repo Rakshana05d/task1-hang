@@ -1,0 +1,30 @@
+import random
+
+# List of possible words for the game
+word_list = ["python", "hangman", "computer", "programming", "developer", "algorithm", "function"]
+
+def choose_word():
+    return random.choice(word_list)
+
+def display_word(word, guessed_letters):
+    # Display the word with guessed letters, and underscores for unguessed letters
+    return ''.join([letter if letter in guessed_letters else '_' for letter in word])
+
+def play_game():
+    word = choose_word()  # Select a random word
+    guessed_letters = []  # List to keep track of guessed letters
+    incorrect_guesses = 0  # Number of incorrect guesses
+    max_incorrect_guesses = 6  # Max number of incorrect guesses allowed
+
+    print("Welcome to Hangman!")
+    print("Try to guess the word.")
+    
+    while incorrect_guesses < max_incorrect_guesses:
+        print(f"Word: {display_word(word, guessed_letters)}")
+        print(f"Incorrect guesses left: {max_incorrect_guesses - incorrect_guesses}")
+        print(f"Guessed letters: {', '.join(guessed_letters)}")
+        
+        guess = input("Enter a letter: ").lower()
+        
+        if len(guess) != 1 or not guess.isalpha():
+            print("Please enter a valid single letter.")
